@@ -1,0 +1,13 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+/gradle.xml
+/runConfigurations.xml
+/inspectionProfiles/Project_Default.xml
+/misc.xml
+/migrations.xml
+/kotlinc.xml
+/deploymentTargetSelector.xml
+/compiler.xml
+/androidTestResultsUserPreferences.xml
+/.name
