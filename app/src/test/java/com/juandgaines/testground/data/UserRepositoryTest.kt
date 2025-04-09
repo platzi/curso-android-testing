@@ -1,23 +1,12 @@
 package com.juandgaines.testground.data
 
 import com.google.common.truth.Truth
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.juandgaines.testground.domain.Coordinates
-import com.juandgaines.testground.domain.Place
-import com.juandgaines.testground.domain.User
 import com.juandgaines.testground.util.MainDispatcherRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import kotlinx.serialization.json.Json
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.mockwebserver.MockResponse
-import okhttp3.mockwebserver.MockWebServer
-import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import retrofit2.HttpException
-import retrofit2.Retrofit
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class UserRepositoryTest {
