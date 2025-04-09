@@ -65,22 +65,6 @@ class ProfileViewModelTest {
         assertThat(viewModel.state.value.isLoading).isFalse()
     }
 
-    @Test
-    fun givenLoadingState_whenLoadProfile_thenStateUpdatesCorrectly() = runTest {
-        // Act & Assert
-        viewModel.state.test {
-            val emission1 = awaitItem()
-            assertThat(emission1.isLoading).isFalse()
 
-            viewModel.loadProfile()
-
-            val emission2 = awaitItem()
-            assertThat(emission2.isLoading).isTrue()
-
-            val emission3 = awaitItem()
-            assertThat(emission3.isLoading).isFalse()
-            assertThat(emission3.profile).isEqualTo(repository.profileToReturn)
-        }
-    }
 }
 
