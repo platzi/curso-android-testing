@@ -22,9 +22,6 @@ import retrofit2.Retrofit
 @OptIn(ExperimentalCoroutinesApi::class)
 class UserRepositoryTest {
 
-    @get:Rule
-    val mainDispatcherRule = MainDispatcherRule()
-
     private lateinit var repository: UserRepositoryImpl
     private lateinit var api: UserApiFake
     private lateinit var mockWebServer: MockWebServer
