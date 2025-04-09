@@ -24,7 +24,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.juandgaines.testground.domain.Coordinates
 import com.juandgaines.testground.domain.Place
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -108,4 +110,20 @@ fun DetailPlaceScreen(
             }
         }
     }
-} 
+}
+
+@PreviewLightDark
+@Composable
+fun DetailPlaceScreenPreview() {
+    DetailPlaceScreen(
+        place = Place(
+            id = "1",
+            name = "Test Place",
+            coordinates = Coordinates(
+                latitude = 37.7749,
+                longitude = -122.4194
+            )
+        ),
+        onNavigateBack = {}
+    )
+}

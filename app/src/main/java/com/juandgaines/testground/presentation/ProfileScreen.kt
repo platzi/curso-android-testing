@@ -20,8 +20,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.juandgaines.testground.domain.Coordinates
 import com.juandgaines.testground.domain.Place
+import com.juandgaines.testground.domain.Profile
+import com.juandgaines.testground.domain.User
 
 @Composable
 fun ProfileScreen(
@@ -118,4 +123,29 @@ fun PlaceCard(
             }
         }
     }
-} 
+}
+
+@PreviewLightDark
+@Composable
+fun ProfileScreenPreview() {
+    val sampleProfile = Profile(
+        user = User(
+            id = "1",
+            username = "JohnDoe"),
+        places = listOf(
+            Place(id = "1",name = "Place 1", coordinates = Coordinates(1.0, 2.0)),
+            Place(id = "2",name = "Place 2", coordinates = Coordinates(3.0, 4.0))
+        )
+    )
+
+    val sampleState = ProfileState(
+        isLoading = false,
+        errorMessage = null,
+        profile = sampleProfile
+    )
+
+    ProfileScreen(
+        state = sampleState,
+        onPlaceClick = {}
+    )
+}
