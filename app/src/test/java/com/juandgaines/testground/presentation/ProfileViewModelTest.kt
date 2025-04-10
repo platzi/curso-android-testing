@@ -8,6 +8,7 @@ import com.juandgaines.testground.domain.Place
 import com.juandgaines.testground.domain.Profile
 import com.juandgaines.testground.domain.User
 import com.juandgaines.testground.domain.UserRepository
+import com.juandgaines.testground.util.MainDispatcherRule
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -24,14 +25,15 @@ import java.util.UUID
 @OptIn(ExperimentalCoroutinesApi::class)
 class ProfileViewModelTest {
 
-    private val testDispatcher = StandardTestDispatcher()
+    @get:Rule
+    val testDispatcher = MainDispatcherRule()
 
     private lateinit var viewModel: ProfileViewModel
     private lateinit var repository: UserRepositoryFake
 
     @Before
     fun setUp() {
-        Dispatchers.setMain(testDispatcher)
+
 
         repository = UserRepositoryFake()
         viewModel = ProfileViewModel(
@@ -42,11 +44,6 @@ class ProfileViewModelTest {
                 )
             )
         )
-    }
-
-    @After
-    fun tearDown() {
-        Dispatchers.resetMain()
     }
 
     @Test
