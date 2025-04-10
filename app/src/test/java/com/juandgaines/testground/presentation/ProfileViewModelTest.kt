@@ -8,7 +8,6 @@ import com.juandgaines.testground.domain.Place
 import com.juandgaines.testground.domain.Profile
 import com.juandgaines.testground.domain.User
 import com.juandgaines.testground.domain.UserRepository
-import com.juandgaines.testground.util.MainDispatcherRule
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
