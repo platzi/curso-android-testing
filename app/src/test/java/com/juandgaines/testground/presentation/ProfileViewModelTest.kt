@@ -8,10 +8,14 @@ import com.juandgaines.testground.domain.Place
 import com.juandgaines.testground.domain.Profile
 import com.juandgaines.testground.domain.User
 import com.juandgaines.testground.domain.UserRepository
-import com.juandgaines.testground.util.MainDispatcherRule
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -20,14 +24,15 @@ import java.util.UUID
 @OptIn(ExperimentalCoroutinesApi::class)
 class ProfileViewModelTest {
 
-    @get:Rule
-    val mainDispatcherRule = MainDispatcherRule()
+    private val testDispatcher = StandardTestDispatcher()
 
     private lateinit var viewModel: ProfileViewModel
     private lateinit var repository: UserRepositoryFake
 
     @Before
     fun setUp() {
+        Dispatchers.setMain(testDispatcher)
+
         repository = UserRepositoryFake()
         viewModel = ProfileViewModel(
             repository = repository,
@@ -37,6 +42,11 @@ class ProfileViewModelTest {
                 )
             )
         )
+    }
+
+    @After
+    fun tearDown() {
+        Dispatchers.resetMain()
     }
 
     @Test
@@ -65,6 +75,22 @@ class ProfileViewModelTest {
         assertThat(viewModel.state.value.isLoading).isFalse()
     }
 
+    @Test
+    fun givenLoadingState_whenLoadProfile_thenStateUpdatesCorrectly() = runTest {
+        // Act & Assert
+        viewModel.state.test {
+            val emission1 = awaitItem()
+            assertThat(emission1.isLoading).isFalse()
 
+            viewModel.loadProfile()
+
+            val emission2 = awaitItem()
+            assertThat(emission2.isLoading).isTrue()
+
+            val emission3 = awaitItem()
+            assertThat(emission3.isLoading).isFalse()
+            assertThat(emission3.profile).isEqualTo(repository.profileToReturn)
+        }
+    }
 }
 

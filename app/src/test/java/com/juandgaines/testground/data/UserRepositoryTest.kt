@@ -5,7 +5,6 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import com.juandgaines.testground.domain.Coordinates
 import com.juandgaines.testground.domain.Place
 import com.juandgaines.testground.domain.User
-import com.juandgaines.testground.util.MainDispatcherRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
